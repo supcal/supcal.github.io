@@ -1,15 +1,11 @@
 ---
 layout: page
 permalink: /teaching/
-title: teaching
-description: Course materials, schedules, and resources for classes taught.
+title: 教学课程
+description: 承担课程，点击课程名进入课程详情与课件下载。
 nav: true
-nav_order: 6
-calendar: true
+nav_order: 4
+calendar: false
 ---
-
-This page displays a collection of courses with detailed schedules, materials, and resources. You can organize your courses by years, terms, or topics.
-
-{% include calendar.liquid calendar_id='test@gmail.com' timezone='Asia/Shanghai' %}
 
 {% include courses.liquid %}

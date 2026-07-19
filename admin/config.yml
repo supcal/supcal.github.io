@@ -1,0 +1,137 @@
+backend:
+  name: github
+  repo: supcal/supcal.github.io
+  branch: main
+  # 线上 OAuth 代理地址（部署好 Cloudflare Worker 后，把下面这行取消注释并填入真实域名）：
+  # base_url: https://supcal-cms-oauth.<你的子域>.workers.dev
+
+# 本地过渡：在项目根目录运行 `npx decap-server` 后，本地后台免 OAuth 即可用
+local_backend: true
+
+# 上传文件（课件等）存放位置
+media_folder: "assets/files"
+public_folder: "/assets/files"
+
+site_url: https://supcal.github.io
+locale: zh
+
+publish_mode: editorial_workflow
+
+collections:
+  # ============ 个人简介（单条记录） ============
+  - name: profile
+    label: 个人简介
+    files:
+      - name: profile
+        label: 简介信息
+        file: _data/profile.yml
+        fields:
+          - {label: 姓名, name: name, widget: string}
+          - {label: 英文名, name: name_en, widget: string}
+          - {label: 职称, name: title, widget: string}
+          - {label: 单位, name: affiliation, widget: string}
+          - {label: 学位, name: degree, widget: string}
+          - {label: 学术兼职, name: societies, widget: list}
+          - {label: 个人简介, name: bio, widget: text}
+          - {label: 邮箱, name: email, widget: string}
+          - {label: 研究方向, name: research_interests, widget: list}
+
+  # ============ 新闻动态（增删改查） ============
+  - name: news
+    label: 新闻动态
+    folder: _news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - {label: 日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+      - {label: 内容, name: body, widget: markdown}
+      - {label: 布局, name: layout, widget: hidden, default: post}
+      - {label: 行内显示, name: inline, widget: hidden, default: true}
+      - {label: related_posts, name: related_posts, widget: hidden, default: false}
+
+  # ============ 论文列表（BibTeX，详情页自动生成） ============
+  - name: publications
+    label: 论文列表
+    files:
+      - name: papers
+        label: 论文库（BibTeX）
+        file: _bibliography/papers.bib
+        description: 每条论文一个 @article 或 @inproceedings 条目。保存后详情页（more →）自动生成。常用字段：title/author/journal 或 booktitle/year/abstract/selected(是否首页精选 true/false)/pdf(PDF路径)。
+        fields:
+          - label: BibTeX 内容
+            name: body
+            widget: code
+            default_language: bibtex
+            allow_language_selection: false
+
+  # ============ 科研项目（增删改查） ============
+  - name: projects
+    label: 科研项目
+    folder: _projects
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - {label: 项目名称, name: title, widget: string}
+      - {label: 一句话简介, name: description, widget: text}
+      - {label: 重要度排序, name: importance, widget: number, default: 1, hint: 数字越小越靠前}
+      - {label: 类别, name: category, widget: select, options: ["主持", "参与"]}
+      - {label: 角色, name: role, widget: string, required: false}
+      - {label: 起止时间, name: period, widget: string, required: false}
+      - {label: 资助来源, name: funding, widget: string, required: false}
+      - {label: 布局, name: layout, widget: hidden, default: page}
+      - {label: 正文（可选）, name: body, widget: markdown, required: false}
+
+  # ============ 教学课程（增删改查 + 课件上传） ============
+  - name: teachings
+    label: 教学课程
+    folder: _teachings
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - {label: 课程名, name: title, widget: string}
+      - {label: 课程简介, name: description, widget: text}
+      - {label: 任课教师, name: instructor, widget: string, default: 李超}
+      - {label: 学年, name: year, widget: number, value_type: int}
+      - {label: 学期, name: term, widget: string}
+      - {label: 上课地点, name: location, widget: string, required: false}
+      - {label: 课程ID, name: course_id, widget: string, hint: 用于课程详情页网址，建议英文，如 data-structures}
+      - {label: 布局, name: layout, widget: hidden, default: course}
+      - label: 教学周历与课件
+        name: schedule
+        widget: list
+        summary: "第{{fields.week}}周 · {{fields.topic}}"
+        fields:
+          - {label: 周次, name: week, widget: number, value_type: int}
+          - {label: 主题, name: topic, widget: string}
+          - {label: 说明, name: description, widget: text, required: false}
+          - label: 课件材料
+            name: materials
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - {label: 材料名称, name: name, widget: string}
+              - {label: 文件（上传课件）或链接, name: url, widget: file, media_folder: /assets/files/teaching, public_folder: /assets/files/teaching, choose_url: true}
+      - {label: 课程详情正文（可选）, name: body, widget: markdown, required: false}
+
+  # ============ 奖励荣誉（增删改查） ============
+  - name: awards
+    label: 奖励荣誉
+    files:
+      - name: awards
+        label: 奖励列表
+        file: _data/awards.yml
+        fields:
+          - label: 奖励
+            name: awards
+            label_singular: 奖励
+            widget: list
+            summary: "{{fields.year}} · {{fields.title}}"
+            fields:
+              - {label: 年份, name: year, widget: number, value_type: int}
+              - {label: 奖励名称, name: title, widget: string}
