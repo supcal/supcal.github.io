@@ -1,0 +1,58 @@
+---
+layout: page
+---
+{% comment %} 论文详情页：jekyll-scholar 为每个 BibTeX 条目生成 {% endcomment %}
+{% assign entry = page.entry %}
+
+<div class="publication-detail">
+  <h2 class="pub-title">{{ entry.title }}</h2>
+
+  <p class="pub-authors">
+    <strong>作者：</strong>{{ entry.author }}
+  </p>
+
+  <p class="pub-venue">
+    {% if entry.journal %}
+      <strong>期刊：</strong><em>{{ entry.journal }}</em>
+    {% elsif entry.booktitle %}
+      <strong>会议：</strong><em>{{ entry.booktitle }}</em>
+    {% endif %}
+    {% if entry.volume %}，Vol. {{ entry.volume }}{% endif %}
+    {% if entry.number %}（{{ entry.number }}）{% endif %}
+    {% if entry.pages %}，pp. {{ entry.pages }}{% endif %}
+    {% if entry.year %}，{{ entry.year }}{% endif %}
+  </p>
+
+  {% if entry.abstract %}
+    <h4>摘要</h4>
+    <p class="pub-abstract">{{ entry.abstract }}</p>
+  {% endif %}
+
+  <div class="pub-links" style="margin: 1rem 0;">
+    {% if entry.pdf %}
+      {% if entry.pdf contains '://' %}
+        <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">📄 下载 PDF</a>
+      {% else %}
+        <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">📄 下载 PDF</a>
+      {% endif %}
+    {% endif %}
+    {% if entry.code %}
+      <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">💻 代码</a>
+    {% endif %}
+    {% if entry.doi %}
+      <a href="https://doi.org/{{ entry.doi }}" class="btn btn-sm z-depth-0" role="button">🔗 DOI</a>
+    {% endif %}
+    {% if entry.html %}
+      <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">🌐 在线阅读</a>
+    {% endif %}
+  </div>
+
+  <h4>引用（BibTeX）</h4>
+  <div class="pub-bibtex">
+    {% highlight bibtex %}{{- entry.bibtex | hideCustomBibtex -}}{% endhighlight %}
+  </div>
+
+  <p style="margin-top: 1.5rem;">
+    <a href="{{ '/publications/' | relative_url }}">← 返回论文列表</a>
+  </p>
+</div>
