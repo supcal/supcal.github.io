@@ -2,8 +2,8 @@ backend:
   name: github
   repo: supcal/supcal.github.io
   branch: main
-  # 线上 OAuth 代理地址（部署好 Cloudflare Worker 后，把下面这行取消注释并填入真实域名）：
-  # base_url: https://supcal-cms-oauth.<你的子域>.workers.dev
+  # 线上 OAuth 代理（Vercel Serverless），Decap CMS 登录入口
+  base_url: https://supcal-cms-oauth.vercel.app
 
 # 本地过渡：在项目根目录运行 `npx decap-server` 后，本地后台免 OAuth 即可用
 local_backend: true
