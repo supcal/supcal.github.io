@@ -309,12 +309,12 @@ a.details:empty {
 }
 
 /* 照片与页面标题「李超 | Chao Li」顶端对齐 */
-.post-header + article .profile {
-  margin-top: -4.5rem;
+article > .profile {
+  margin-top: -5.5rem;
   float: right;
 }
 @media (max-width: 768px) {
-  .post-header + article .profile {
+  article > .profile {
     margin-top: 0;
     float: none;
   }
@@ -423,16 +423,20 @@ a.details:empty {
 /* ---------- 科研项目条目式列表 ---------- */
 .project-list {
   list-style: decimal;
-  padding-left: 1.8rem;
+  padding-left: 2rem;
+  font-size: 1.05rem;
 }
 .project-list li {
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.6rem;
+  padding: 0.7rem 0.5rem 0.7rem 0.3rem;
+  margin-bottom: 0.5rem;
   background: rgba(255,255,255,0.55);
   border-radius: 10px;
   border-left: 3px solid #B22238;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.project-list li::marker {
+  font-weight: 700;
+  color: #8b1a2b;
 }
 .project-list li strong {
   color: #1a1a1a;
