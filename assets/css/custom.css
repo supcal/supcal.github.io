@@ -1,0 +1,214 @@
+/* ============================================
+   自定义样式 · 李超学术主页
+   天津师范大学校徽红 (#B22238) 为点缀色
+   渐变背景 + 卡片化 + 大字重排
+   ============================================ */
+
+/* ---------- 基础字号 ---------- */
+html {
+  font-size: 18px;  /* 从 16px 放大到 18px */
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  line-height: 1.8;
+}
+
+h1, .h1 { font-size: 2.2rem; font-weight: 700; }
+h2, .h2 { font-size: 1.8rem; font-weight: 600; }
+h3, .h3 { font-size: 1.4rem; font-weight: 600; }
+
+/* ---------- 导航 ---------- */
+.navbar {
+  font-size: 1.05rem;
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+}
+
+/* ---------- 页面主容器 ---------- */
+.container {
+  max-width: 1000px !important;
+}
+
+/* ---------- 首页背景渐变 ---------- */
+/* 首页顶部区域：柔和蓝紫渐变（学术感） */
+
+/* 装修饰：if page-layout-about 不可用，用 profile+news 容器 */
+.profile {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1.2rem !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+@media (min-width: 768px) {
+  .profile {
+    padding: 1.8rem !important;
+  }
+}
+
+/* 新闻区 */
+.news {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  padding: 1.2rem !important;
+  margin-top: 1rem;
+}
+
+/* ---------- 卡片风格（科研项目、课程等） ---------- */
+.card,
+.row > [class*="col-"] > .card {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  border: 1px solid rgba(0,0,0,0.04) !important;
+  overflow: hidden;
+}
+.card:hover,
+.row > [class*="col-"] > .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+}
+
+/* ---------- 论文列表篇目 ---------- */
+.publications .bibliography .title {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.publications .bibliography .author {
+  font-size: 0.92rem;
+}
+.publications .bibliography .periodical {
+  font-size: 0.88rem;
+}
+.publications .bibliography > li {
+  padding: 1.2rem;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.6);
+  transition: background 0.2s;
+  border-left: 3px solid transparent;
+}
+.publications .bibliography > li:hover {
+  background: rgba(255,255,255,0.95);
+  border-left-color: #B22238;  /* 校徽红 */
+}
+
+/* 论文 more → 按钮 */
+.publications .links .btn {
+  font-size: 0.82rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px !important;
+  border: 1px solid #e0e0e0;
+  transition: all 0.15s;
+}
+.publications .links .btn:hover {
+  background: #B22238;
+  color: #fff !important;
+  border-color: #B22238;
+}
+
+/* ---------- 天津师大校徽红点缀 ---------- */
+a {
+  color: #8b1a2b;
+}
+a:hover {
+  color: #B22238;
+  text-decoration: underline;
+}
+
+/* 首页副标题下方的装饰线 */
+.post-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #B22238, #8b1a2b);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+/* ---------- 奖励列表美化 ---------- */
+.awards li {
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.5rem;
+  background: #f8f6fa;
+  border-radius: 8px;
+  border-left: 3px solid #B22238;
+  list-style: none;
+}
+.awards li strong {
+  color: #8b1a2b;
+}
+
+/* ---------- 课程详情页 ---------- */
+
+/* ---------- 页脚 ---------- */
+.footer {
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 1.5rem !important;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ---------- 论文详情页 ---------- */
+.publication-detail {
+  line-height: 1.8;
+}
+.pub-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+.pub-abstract {
+  background: #f8f6fa;
+  padding: 1.2rem;
+  border-radius: 10px;
+  border-left: 4px solid #B22238;
+}
+
+/* 响应的 Contact icons 大小 */
+.contact-icons a {
+  font-size: 1.6rem;
+  transition: transform 0.15s, color 0.15s;
+}
+.contact-icons a:hover {
+  transform: scale(1.15);
+  color: #B22238 !important;
+}
+
+/* 首页社交区 */
+.contact-icons {
+  gap: 0.6rem;
+}
+
+/* ---------- 项目分类标签 ---------- */
+
+/* 暗色模式适配（保留阅读舒适度） */
+@media (prefers-color-scheme: dark) {
+  .profile {
+    background: rgba(30,30,50,0.85);
+    backdrop-filter: blur(8px);
+  }
+  .news {
+    background: rgba(30,30,50,0.7);
+  }
+  .publications .bibliography > li {
+    background: rgba(255,255,255,0.04);
+  }
+  .publications .bibliography > li:hover {
+    background: rgba(255,255,255,0.08);
+  }
+  .awards li {
+    background: rgba(255,255,255,0.04);
+  }
+  .pub-abstract {
+    background: rgba(255,255,255,0.05);
+  }
+}
