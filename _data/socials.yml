@@ -9,6 +9,6 @@ rss_icon: false
 # wechat_qr: wechat-qr.png # 如需微信二维码，将图片放 assets/img/ 并取消注释
 # 学校个人主页
 custom_social:
-  logo: /assets/img/favicon.png
+  logo: /assets/img/cl-logo.svg
   title: 天津师范大学教师主页
   url: https://xxgc.tjnu.edu.cn/info/1166/3643.htm

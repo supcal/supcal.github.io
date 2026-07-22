@@ -16,6 +16,9 @@ html {
 
 body {
   line-height: 1.8;
+  background: linear-gradient(180deg, #f5f7fa 0%, #eef1f6 400px, #ffffff 800px);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 h1, .h1 { font-size: 2.2rem; font-weight: 700; }
@@ -34,30 +37,15 @@ h3, .h3 { font-size: 1.4rem; font-weight: 600; }
   max-width: 1000px !important;
 }
 
-/* ---------- 首页背景渐变 ---------- */
-/* 首页顶部区域：柔和蓝紫渐变（学术感） */
-.page-layout-about {
-  position: relative;
-}
-.page-layout-about::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 520px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf4 40%, #f0eef8 100%);
-  z-index: -1;
-  border-radius: 0 0 30% 30% / 20px;
-}
-
-/* 装修饰：if page-layout-about 不可用，用 profile+news 容器 */
+/* ---------- 人物简介卡片毛玻璃 ---------- */
+header + article > div:first-of-type,
 .profile {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.88);
   backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 1.2rem !important;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border: 1px solid rgba(255,255,255,0.8);
 }
 @media (min-width: 768px) {
   .profile {
@@ -74,7 +62,69 @@ h3, .h3 { font-size: 1.4rem; font-weight: 600; }
   margin-top: 1rem;
 }
 
-/* ---------- 卡片风格（科研项目、课程等） ---------- */
+/* ---------- 首页快速导航卡片网格 ---------- */
+.section-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+@media (max-width: 600px) {
+  .section-nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.section-nav-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1.4rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(178,34,56,0.10);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
+  text-decoration: none !important;
+  color: #333 !important;
+}
+.section-nav-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(178,34,56,0.12);
+  border-color: rgba(178,34,56,0.25);
+  background: #fff;
+}
+.section-nav-card .nav-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+.section-nav-card .nav-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #8b1a2b;
+}
+.section-nav-card .nav-desc {
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: 0.15rem;
+  line-height: 1.3;
+}
+.section-nav-card .nav-more {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #B22238;
+  margin-top: auto;
+  padding-top: 0.4rem;
+  align-self: flex-end;
+}
+
+/* ---------- 首页个人简介区 ---------- */
+.bio-section {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  background: rgba(255,255,255,0.5);
+  padding: 0.8rem 0;
+  border-radius: 10px;
+}
 .card,
 .project-card,
 .row > [class*="col-"] > .card,
@@ -237,12 +287,25 @@ a:hover {
 
 /* 暗色模式适配（保留阅读舒适度） */
 @media (prefers-color-scheme: dark) {
-  .page-layout-about::before {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #1f1a2e 100%);
+  body {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 400px, #1a1a2e 800px);
   }
   .profile {
     background: rgba(30,30,50,0.85);
     backdrop-filter: blur(8px);
+    border-color: rgba(255,255,255,0.05);
+  }
+  .section-nav-card {
+    background: rgba(30,30,50,0.85);
+    border-color: rgba(178,34,56,0.2);
+    color: #ccc !important;
+  }
+  .section-nav-card:hover {
+    background: rgba(40,40,70,0.9);
+    border-color: rgba(178,34,56,0.4);
+  }
+  .bio-section {
+    background: rgba(255,255,255,0.03);
   }
   .news {
     background: rgba(30,30,50,0.7);
