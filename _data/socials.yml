@@ -4,6 +4,11 @@ cv_pdf: /assets/pdf/Information_Fusion2024.pdf # 可换为你的完整简历
 email: superlee@tjnu.edu.cn
 scholar_userid: aSqYX4oAAAAJ # Google Scholar
 github_username: supcal
-orcid_id: "" # 如有 ORCID 可填入
+orcid_id: 0000-0001-5202-7246
 rss_icon: false
 # wechat_qr: wechat-qr.png # 如需微信二维码，将图片放 assets/img/ 并取消注释
+# 学校个人主页
+custom_social:
+  logo: /assets/img/favicon.png
+  title: 天津师范大学教师主页
+  url: https://xxgc.tjnu.edu.cn/info/1166/3643.htm

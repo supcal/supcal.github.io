@@ -14,7 +14,7 @@ footer_text: >
   © 李超 · 天津师范大学 计算机与信息工程学院 · Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> &amp; <a href="https://github.com/alshedivat/al-folio">al-folio</a>.
 keywords: 李超, Chao Li, 天津师范大学, 情感计算, 脑机接口, EEG, 情绪识别, 深度学习 # add your own keywords or leave empty
 lang: zh-CN # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: 🎓 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: favicon.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://supcal.github.io # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. /blog/. Leave blank for root
