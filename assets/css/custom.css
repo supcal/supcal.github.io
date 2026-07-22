@@ -43,9 +43,15 @@ header + article > div:first-of-type,
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(8px);
   border-radius: 16px;
-  padding: 1.2rem !important;
+  padding: 1rem 1.2rem !important;
   box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   border: 1px solid rgba(255,255,255,0.8);
+  margin-top: 0 !important;
+}
+/* 照片与第一行文字顶端对齐 */
+.profile figure {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 @media (min-width: 768px) {
   .profile {
@@ -245,6 +251,16 @@ a:hover {
 .contact-icons a:hover {
   transform: scale(1.15);
   color: #B22238 !important;
+}
+/* CL 自定义 SVG 图标与字体图标尺寸对齐 */
+.contact-icons a svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  vertical-align: middle;
+}
+.contact-icons a svg image {
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 /* 首页社交区 */
