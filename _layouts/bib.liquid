@@ -189,8 +189,6 @@
 
     <!-- Links/Buttons -->
     <div class="links">
-      {% comment %} 论文详情页链接（more →），与 scholar details_dir/:key 一致 {% endcomment %}
-      <a href="{{ site.scholar.details_dir | default: 'bibliography' | prepend: '/' | append: '/' | append: entry.key | append: '/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">more →</a>
       {% if entry.award %}
         <a class="award btn btn-sm z-depth-0" role="button">
           {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awarded{% endif -%}

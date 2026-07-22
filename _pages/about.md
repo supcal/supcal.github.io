@@ -52,7 +52,7 @@ latest_posts:
   <a href="{{ '/teaching/' | relative_url }}" class="section-nav-card">
     <span class="nav-icon">📖</span>
     <span class="nav-title">教学课程</span>
-    <span class="nav-desc">数据结构、Python、C 语言、C++</span>
+    <span class="nav-desc">数据结构（含课程设计）、Python、C 语言、C++</span>
     <span class="nav-more">more →</span>
   </a>
   <a href="{{ '/awards/' | relative_url }}" class="section-nav-card">
