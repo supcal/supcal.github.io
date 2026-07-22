@@ -358,6 +358,7 @@ scholar:
 
   details_dir: bibliography
   details_layout: bibtex.html
+  details_link: ""
 
   query: "@*"
   group_by: year
