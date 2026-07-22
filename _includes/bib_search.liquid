@@ -1,0 +1,76 @@
+{% if site.bib_search %}
+  <script src="{{ '/assets/js/bibsearch.js' | relative_url | bust_file_cache }}" type="module"></script>
+
+  <div class="pub-filter-bar">
+    <!-- 搜索框 -->
+    <input type="text" id="bibsearch" spellcheck="false" autocomplete="off" class="search bibsearch-form-input" placeholder="搜索论文（标题、作者、关键词）">
+
+    <!-- 年份筛选 -->
+    <div class="year-filters" id="year-filters">
+      <button class="year-btn active" data-year="all">全部</button>
+      {% assign years = site.data.venues.years | default: "" %}
+      <!-- jekyll-scholar 按年份分组，无法直接获取年份列表，用 JS 动态生成 -->
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // 等待页面加载后，从 DOM 提取年份并生成按钮
+      function initYearFilter() {
+        var groups = document.querySelectorAll('.publications h2');
+        var container = document.getElementById('year-filters');
+        if (!container || !groups.length) return;
+
+        var years = [];
+        groups.forEach(function(h) {
+          var m = h.textContent.trim().match(/\d{4}/);
+          if (m && years.indexOf(m[0]) === -1) years.push(m[0]);
+        });
+        years.sort(function(a,b){return b-a}); // 倒序
+
+        years.forEach(function(y) {
+          var btn = document.createElement('button');
+          btn.className = 'year-btn';
+          btn.dataset.year = y;
+          btn.textContent = y;
+          container.appendChild(btn);
+        });
+
+        // 点击筛选
+        container.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'BUTTON') return;
+          var year = e.target.dataset.year;
+          // 切换激活态
+          container.querySelectorAll('.year-btn').forEach(function(b){b.classList.remove('active')});
+          e.target.classList.add('active');
+
+          var allGroups = document.querySelectorAll('.publications .bibliography > li');
+          if (year === 'all') {
+            allGroups.forEach(function(li){li.style.display = ''});
+            return;
+          }
+          // 找到对应年份的 h2
+          var targetH = null;
+          groups.forEach(function(h) {
+            if (h.textContent.trim() === year) targetH = h;
+          });
+          if (!targetH) return;
+          var next = targetH.nextElementSibling;
+          var list = next && next.tagName === 'OL' ? next : null;
+          if (!list) return;
+
+          allGroups.forEach(function(li){li.style.display = 'none'});
+          // 显示选中年份的论文
+          list.querySelectorAll('li').forEach(function(li){li.style.display = ''});
+          // 也显示该年份的 h2
+          targetH.style.display = '';
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initYearFilter);
+      } else {
+        initYearFilter();
+      }
+    })();
+  </script>
+{% endif %}
