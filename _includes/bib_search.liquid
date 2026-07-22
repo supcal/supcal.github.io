@@ -3,22 +3,27 @@
 
   <div class="pub-filter-bar">
     <!-- 搜索框 -->
-    <input type="text" id="bibsearch" spellcheck="false" autocomplete="off" class="search bibsearch-form-input" placeholder="搜索论文（标题、作者、关键词）">
+    <input type="text" id="bibsearch" spellcheck="false" autocomplete="off" class="search bibsearch-form-input" placeholder="搜索标题、作者、关键词...">
+
+    <!-- 类型筛选 -->
+    <select id="type-filter" class="pub-filter-select">
+      <option value="all">全部类型</option>
+      <option value="article">期刊论文 (Journal)</option>
+      <option value="inproceedings">会议论文 (Conference)</option>
+    </select>
 
     <!-- 年份筛选 -->
     <div class="year-filters" id="year-filters">
-      <button class="year-btn active" data-year="all">全部</button>
-      {% assign years = site.data.venues.years | default: "" %}
-      <!-- jekyll-scholar 按年份分组，无法直接获取年份列表，用 JS 动态生成 -->
+      <button class="year-btn active" data-year="all">全部年份</button>
     </div>
   </div>
 
   <script>
     (function() {
-      // 等待页面加载后，从 DOM 提取年份并生成按钮
-      function initYearFilter() {
+      function initFilters() {
         var groups = document.querySelectorAll('.publications h2');
         var container = document.getElementById('year-filters');
+        var typeSelect = document.getElementById('type-filter');
         if (!container || !groups.length) return;
 
         var years = [];
@@ -26,8 +31,7 @@
           var m = h.textContent.trim().match(/\d{4}/);
           if (m && years.indexOf(m[0]) === -1) years.push(m[0]);
         });
-        years.sort(function(a,b){return b-a}); // 倒序
-
+        years.sort(function(a,b){return b-a});
         years.forEach(function(y) {
           var btn = document.createElement('button');
           btn.className = 'year-btn';
@@ -36,40 +40,76 @@
           container.appendChild(btn);
         });
 
-        // 点击筛选
+        function applyFilters() {
+          var selectedYear = container.querySelector('.year-btn.active');
+          var year = selectedYear ? selectedYear.dataset.year : 'all';
+          var type = typeSelect.value;
+          var searchVal = (document.getElementById('bibsearch').value || '').toLowerCase();
+
+          var allItems = document.querySelectorAll('.publications .bibliography > li');
+          allItems.forEach(function(li) {
+            var show = true;
+            // Type filter
+            if (type !== 'all') {
+              var periodical = li.querySelector('.periodical');
+              if (periodical) {
+                var text = periodical.textContent.toLowerCase();
+                if (type === 'article' && text.includes('proceeding')) show = false;
+                if (type === 'inproceedings' && !text.includes('proceeding') && !text.includes('conference') && !text.includes('symposium') && !text.includes('workshop') && !text.includes('icassp') && !text.includes('icip')) show = false;
+              }
+            }
+            // Year filter - show/hide year group
+            if (year !== 'all') {
+              var h2 = li.closest('.publications').querySelector('h2');
+              // Better: find parent year heading
+              var pubDiv = li.closest('.publications');
+              var allH2s = pubDiv.querySelectorAll('h2');
+              var parentYear = '';
+              allH2s.forEach(function(h) {
+                if (h.compareDocumentPosition(li) & Node.DOCUMENT_POSITION_FOLLOWING) {
+                  if (!parentYear || (h.compareDocumentPosition(allH2s[Array.from(allH2s).indexOf(h)-1]) & Node.DOCUMENT_POSITION_PRECEDING)) {
+                    // just use the h2 before this li
+                  }
+                }
+              });
+              // Simple approach: just use the year from abstract/periodical
+              var periodical = li.querySelector('.periodical');
+              if (periodical) {
+                var yearMatch = periodical.textContent.match(/(\\d{4})/);
+                if (!yearMatch || yearMatch[1] !== year) show = false;
+              }
+            }
+            // Search filter (handled by bibsearch.js, but we also apply here)
+            if (searchVal) {
+              var text = li.textContent.toLowerCase();
+              if (text.indexOf(searchVal) === -1) show = false;
+            }
+            li.style.display = show ? '' : 'none';
+          });
+        }
+
+        // Year button click
         container.addEventListener('click', function(e) {
           if (e.target.tagName !== 'BUTTON') return;
-          var year = e.target.dataset.year;
-          // 切换激活态
           container.querySelectorAll('.year-btn').forEach(function(b){b.classList.remove('active')});
           e.target.classList.add('active');
-
-          var allGroups = document.querySelectorAll('.publications .bibliography > li');
-          if (year === 'all') {
-            allGroups.forEach(function(li){li.style.display = ''});
-            return;
-          }
-          // 找到对应年份的 h2
-          var targetH = null;
-          groups.forEach(function(h) {
-            if (h.textContent.trim() === year) targetH = h;
-          });
-          if (!targetH) return;
-          var next = targetH.nextElementSibling;
-          var list = next && next.tagName === 'OL' ? next : null;
-          if (!list) return;
-
-          allGroups.forEach(function(li){li.style.display = 'none'});
-          // 显示选中年份的论文
-          list.querySelectorAll('li').forEach(function(li){li.style.display = ''});
-          // 也显示该年份的 h2
-          targetH.style.display = '';
+          applyFilters();
         });
+
+        // Type select change
+        typeSelect.addEventListener('change', applyFilters);
+
+        // Intercept bibsearch input
+        var searchInput = document.getElementById('bibsearch');
+        if (searchInput) {
+          searchInput.addEventListener('input', applyFilters);
+        }
       }
+
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initYearFilter);
+        document.addEventListener('DOMContentLoaded', initFilters);
       } else {
-        initYearFilter();
+        initFilters();
       }
     })();
   </script>
