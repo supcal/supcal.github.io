@@ -2,7 +2,7 @@
 layout: about
 title: 首页
 permalink: /
-subtitle: <a href='https://xxgc.tjnu.edu.cn/info/1166/3643.htm'>天津师范大学 计算机与信息工程学院</a> · 副教授 · 硕士生导师
+subtitle: 天津师范大学 计算机与信息工程学院 · 副教授 · 硕士生导师
 
 profile:
   align: right
