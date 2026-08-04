@@ -472,12 +472,12 @@ article > .profile {
   margin-bottom: 0.3rem;
 }
 
-/* ---------- 隐藏论文条目空的 abbr 占位列 ---------- */
-.publications .bibliography .row > .abbr:empty {
-  display: none;
+/* ---------- 隐藏论文条目 abbr 占位列（无缩写字段） ---------- */
+.publications .bibliography .row > .abbr {
+  display: none !important;
 }
-.publications .bibliography .row > .abbr:empty + .col-sm-8 {
-  flex: 0 0 100%;
-  max-width: 100%;
-  width: 100%;
+.publications .bibliography .row > .abbr + .col-sm-8 {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
 }
