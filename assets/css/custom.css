@@ -157,7 +157,7 @@ header + article > div:first-of-type,
   font-size: 0.88rem;
 }
 .publications .bibliography > li {
-  padding: 1.2rem;
+  padding: 1.2rem 1.2rem 1.2rem 3rem;
   margin-bottom: 0.8rem;
   border-radius: 10px;
   background: rgba(255,255,255,0.6);
@@ -286,48 +286,74 @@ article > .profile {
 /* ---------- 项目分类标签 ---------- */
 
 /* 暗色模式适配（保留阅读舒适度） */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 400px, #1a1a2e 800px);
-  }
-  .profile {
-    background: rgba(30,30,50,0.85);
-    backdrop-filter: blur(8px);
-    border-color: rgba(255,255,255,0.05);
-  }
-  .section-nav-card {
-    background: rgba(30,30,50,0.85);
-    border-color: rgba(178,34,56,0.2);
-    color: #ccc !important;
-  }
-  .section-nav-card:hover {
-    background: rgba(40,40,70,0.9);
-    border-color: rgba(178,34,56,0.4);
-  }
-  .bio-section {
-    background: rgba(255,255,255,0.03);
-  }
-  .news {
-    background: rgba(30,30,50,0.7);
-  }
-  .publications .bibliography > li {
-    background: rgba(255,255,255,0.04);
-  }
-  .publications .bibliography > li:hover {
-    background: rgba(255,255,255,0.08);
-  }
-  .awards li {
-    background: rgba(255,255,255,0.04);
-  }
-  .pub-abstract {
-    background: rgba(255,255,255,0.05);
-  }
-  .project-list li {
-    background: rgba(255,255,255,0.04);
-  }
-  .project-list li strong {
-    color: #eee;
-  }
+html[data-theme="dark"] {
+  /* 暗色模式（al-folio 通过 html[data-theme=dark] 切换） */
+}
+html[data-theme="dark"] body {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 400px, #1a1a2e 800px);
+  color: #ddd;
+}
+html[data-theme="dark"] .profile {
+  background: rgba(30,30,50,0.85);
+  backdrop-filter: blur(8px);
+  border-color: rgba(255,255,255,0.05);
+}
+html[data-theme="dark"] .section-nav-card {
+  background: rgba(30,30,50,0.85);
+  border-color: rgba(178,34,56,0.2);
+  color: #ccc !important;
+}
+html[data-theme="dark"] .section-nav-card:hover {
+  background: rgba(40,40,70,0.9);
+  border-color: rgba(178,34,56,0.4);
+}
+html[data-theme="dark"] .bio-section {
+  background: rgba(255,255,255,0.03);
+}
+html[data-theme="dark"] .news {
+  background: rgba(30,30,50,0.7);
+}
+html[data-theme="dark"] .publications .bibliography > li {
+  background: rgba(255,255,255,0.04);
+}
+html[data-theme="dark"] .publications .bibliography > li:hover {
+  background: rgba(255,255,255,0.08);
+}
+html[data-theme="dark"] .awards li {
+  background: rgba(255,255,255,0.04);
+}
+html[data-theme="dark"] .pub-abstract {
+  background: rgba(255,255,255,0.05);
+}
+html[data-theme="dark"] .project-list li {
+  background: rgba(255,255,255,0.04);
+}
+html[data-theme="dark"] .project-list li strong {
+  color: #eee;
+}
+
+/* ---------- 论文列表序号 ---------- */
+.publications .bibliography {
+  list-style: none;
+  counter-reset: bib-counter;
+  padding-left: 0;
+}
+.publications .bibliography > li {
+  counter-increment: bib-counter;
+  position: relative;
+  padding-left: 3rem !important;
+}
+.publications .bibliography > li::before {
+  content: counter(bib-counter);
+  position: absolute;
+  left: 0.8rem;
+  top: 1.3rem;
+  font-weight: 700;
+  color: #8b1a2b;
+  font-size: 1rem;
+}
+html[data-theme="dark"] .publications .bibliography > li::before {
+  color: #e07a8a;
 }
 
 /* ---------- 论文筛选栏 ---------- */
