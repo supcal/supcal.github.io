@@ -172,6 +172,11 @@
       {% if entry.bibtex_show %}
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
+      {% if entry.citations %}
+        <a href="https://scholar.google.com/citations?user={{ site.data.socials.scholar_userid | default: '' }}" class="btn btn-sm z-depth-0 citations-badge" role="button" target="_blank" rel="external nofollow noopener">
+          <i class="ai ai-google-scholar"></i> 引用 {{ entry.citations }}
+        </a>
+      {% endif %}
       {% if entry.html %}
         {% if entry.html contains '://' %}
           <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">HTML</a>

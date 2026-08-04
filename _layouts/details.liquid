@@ -29,6 +29,11 @@ layout: page
   {% endif %}
 
   <div class="pub-links" style="margin: 1rem 0;">
+    {% if entry.citations %}
+      <a href="https://scholar.google.com/citations?user={{ site.data.socials.scholar_userid | default: '' }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">
+        <i class="ai ai-google-scholar"></i> Google Scholar 引用 {{ entry.citations }} 次
+      </a>
+    {% endif %}
     {% if entry.pdf %}
       {% if entry.pdf contains '://' %}
         <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">📄 下载 PDF</a>
