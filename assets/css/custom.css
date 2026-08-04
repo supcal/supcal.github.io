@@ -393,3 +393,18 @@ article > .profile {
 .project-list li strong {
   color: #1a1a1a;
 }
+
+/* ---------- 引用次数徽章 ---------- */
+.citations-badge {
+  background: #f0f4f8 !important;
+  border-color: #c8d6e5 !important;
+  color: #2c5282 !important;
+}
+.citations-badge:hover {
+  background: #2c5282 !important;
+  color: #fff !important;
+}
+.pub-links .btn {
+  margin-right: 0.3rem;
+  margin-bottom: 0.3rem;
+}
