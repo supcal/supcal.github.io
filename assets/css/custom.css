@@ -322,6 +322,12 @@ article > .profile {
   .pub-abstract {
     background: rgba(255,255,255,0.05);
   }
+  .project-list li {
+    background: rgba(255,255,255,0.04);
+  }
+  .project-list li strong {
+    color: #eee;
+  }
 }
 
 /* ---------- 论文筛选栏 ---------- */
@@ -374,21 +380,30 @@ article > .profile {
 
 /* ---------- 科研项目条目式列表 ---------- */
 .project-list {
-  list-style: decimal;
-  padding-left: 2rem;
+  list-style: none;
+  counter-reset: project-counter;
+  padding-left: 0;
   font-size: 1.05rem;
 }
 .project-list li {
-  padding: 0.7rem 0.5rem 0.7rem 0.3rem;
+  counter-increment: project-counter;
+  position: relative;
+  padding: 0.7rem 0.8rem 0.7rem 2.6rem;
   margin-bottom: 0.5rem;
   background: rgba(255,255,255,0.55);
   border-radius: 10px;
   border-left: 3px solid #B22238;
   line-height: 1.7;
 }
-.project-list li::marker {
+.project-list li::before {
+  content: counter(project-counter);
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
   font-weight: 700;
   color: #8b1a2b;
+  font-size: 1.05rem;
 }
 .project-list li strong {
   color: #1a1a1a;
