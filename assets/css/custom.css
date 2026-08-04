@@ -305,7 +305,7 @@ a.details:empty {
 
 /* 照片与页面标题「李超 | Chao Li」顶端对齐 */
 article > .profile {
-  margin-top: -5.5rem !important;
+  margin-top: -6.6rem !important;
   float: right;
 }
 @media (max-width: 768px) {
