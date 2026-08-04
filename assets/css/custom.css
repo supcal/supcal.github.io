@@ -471,3 +471,13 @@ article > .profile {
   margin-right: 0.3rem;
   margin-bottom: 0.3rem;
 }
+
+/* ---------- 隐藏论文条目空的 abbr 占位列 ---------- */
+.publications .bibliography .row > .abbr:empty {
+  display: none;
+}
+.publications .bibliography .row > .abbr:empty + .col-sm-8 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+}
