@@ -26,13 +26,11 @@ latest_posts:
 <div class="bio-section">
   <p><strong>{{ p.name }}</strong>（{{ p.name_en }}），工学博士，{{ p.affiliation }}{{ p.title }}。{{ p.societies | join: "、" }}。{{ p.bio }}</p>
 
-  <p>
-    <strong>研究方向</strong>：{{ p.research_interests | join: "、" }}
-    &nbsp;·&nbsp;
-    <a href="mailto:{{ p.email }}">{{ p.email }}</a>
-    &nbsp;·&nbsp;
-    欢迎对情感计算、脑机接口方向感兴趣的同学报考研究生！
-  </p>
+  <p class="bio-line"><strong>研究方向</strong>：{{ p.research_interests | join: "、" }}</p>
+
+  <p class="bio-line"><strong>联系方式</strong>：<a href="mailto:{{ p.email }}">{{ p.email }}</a></p>
+
+  <p class="bio-line">欢迎对情感计算、脑机接口方向感兴趣的同学报考研究生！</p>
 </div>
 
 <!-- 快速导航卡片 -->
@@ -40,7 +38,7 @@ latest_posts:
   <a href="{{ '/publications/' | relative_url }}" class="section-nav-card">
     <span class="nav-icon">📄</span>
     <span class="nav-title">论文发表</span>
-    <span class="nav-desc">{{ site.data.awards.awards | size }} 篇期刊/会议论文</span>
+    <span class="nav-desc">{% assign pub_count = site.data.pub_count | default: 31 %}31 篇期刊/会议论文</span>
     <span class="nav-more">more →</span>
   </a>
   <a href="{{ '/projects/' | relative_url }}" class="section-nav-card">
