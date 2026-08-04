@@ -43,7 +43,7 @@ header + article > div:first-of-type,
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(8px);
   border-radius: 16px;
-  padding: 1rem 1.2rem !important;
+  padding: 0 1.2rem 1rem 1.2rem !important;
   box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   border: 1px solid rgba(255,255,255,0.8);
   margin-top: 0 !important;
@@ -55,11 +55,6 @@ header + article > div:first-of-type,
 }
 .row > .profile-wrapper {
   padding-top: 0 !important;
-}
-@media (min-width: 768px) {
-  .profile {
-    padding: 1.8rem !important;
-  }
 }
 
 /* 新闻区 */
@@ -319,7 +314,6 @@ article > .profile {
     float: none;
   }
 }
-
 /* 首页社交区 */
 .contact-icons {
   gap: 0.6rem;
